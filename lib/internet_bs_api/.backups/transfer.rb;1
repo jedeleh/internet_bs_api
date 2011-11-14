@@ -1,0 +1,8 @@
+module IBS
+  module InternetBsApi
+    module Domain
+      module Transfer
+      end
+    end
+  end
+end

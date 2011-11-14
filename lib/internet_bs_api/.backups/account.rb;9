@@ -1,0 +1,33 @@
+module IBS
+  module InternetBsApi
+    module Account
+      module Balance
+        def get_balance
+        end
+      end
+
+      module DefaultCurrency
+        def get_default_currency
+        end
+
+        def set_default_currency
+        end
+      end
+
+      module Configuration
+        def get_configuration
+        end
+
+        def set_configuration
+        end
+      end
+
+      module PriceList
+      end
+
+      module TransactionInfo
+      end
+    end
+  end
+end
+

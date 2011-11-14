@@ -1,0 +1,14 @@
+module IBS
+  module InternetBsApi
+    module Domain
+      module Transfer
+        def initiate
+        end
+
+        def cancel
+        end
+
+      end
+    end
+  end
+end

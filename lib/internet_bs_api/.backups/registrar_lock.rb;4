@@ -1,0 +1,14 @@
+module IBS
+  module InternetBsApi
+    module Domain
+      def enable
+      end
+
+      def disable
+      end
+
+      def status
+      end
+    end
+  end
+end

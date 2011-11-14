@@ -1,0 +1,11 @@
+require 'internet_bs_api/connection'
+require 'internet_bs_api/domain'
+require 'internet_bs_api/private_who_is'
+require 'internet_bs_api/registrar_lock'
+require 'internet_bs_api/transfer'
+require 'internet_bs_api/dns_record'
+require 'internet_bs_api/account'
+
+
+module InternetBsApi
+end

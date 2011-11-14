@@ -1,0 +1,106 @@
+module IBS
+  module InternetBsApi
+    module Domain
+      def check(domain_name_with_tld)
+        connection = Connection.new
+        options = {"Domain" => domain_name_with_tld}
+        connection.post("Domain/Check", options)
+      end
+
+      def check_multiple_tlds(domain, tlds)
+        # TODO: representation for response that is more useful.
+        responses = []
+        tlds.each do |tld|
+          domain_name_with_tld = domain + "." + tld
+          responses << check_availability(domain_name_with_tld)
+        end
+        responses
+      end
+
+      def create(domain_name_with_tld, contacts)
+        connection = Connection.new
+        options = {}
+        if admin_contact
+          options = admin_contact.internet_bs_format nil
+        end
+        options["Domain"] = domain_name_with_tld
+
+        # this is create, so there is no member component to the URL
+        connection.post("Domain/Create", options)
+      end
+
+      def update
+      end
+
+      def renew
+      end
+
+      def info(domain)
+        options = {"Domain" => domain}
+        connection.post("Domain/Info", options)
+      end
+
+      def list
+      end
+
+      def registry_status
+      end
+
+      def count
+      end
+
+      module EmailForward
+      end
+
+      module UrlForward
+        def forward_domain(forward_source, forward_target)
+          options = {"Source" => forward_source, "Destination" => forward_target}
+          connection.post("Domain/UrlForward/Add", options)
+        end
+      end
+
+      module Host
+        def create
+        end
+
+        def update
+        end
+
+        def info
+        end
+
+        def delete
+        end
+
+        def list
+        end
+      end
+
+      module DnsRecord
+        def add(domain_name_with_tld, type, value)
+          options = {
+            "FullRecordName" => "www.#{domain_name_with_tld}",
+            "Type" => type,
+            "Value" => value
+          }
+          connection.post("Domain/DnsRecord/Add", options)
+        end
+
+        end
+
+        def remove
+        end
+
+        def update
+        end
+
+        def list
+        end
+      end
+
+      module PrivateWhoIs
+      end
+    end
+  end
+end
+

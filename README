@@ -1,0 +1,3 @@
+A first checkin for a Rails Gem to support the Internet.bs reseller API.
+
+This first pass will only support US behavior. If anyone wants to enhance to add other countries, that would be more than welcome.

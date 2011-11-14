@@ -1,0 +1,3 @@
+module IBS
+  module InternetBsApi
+    module Domain

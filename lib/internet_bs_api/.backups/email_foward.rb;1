@@ -1,0 +1,10 @@
+module IBS
+  module InternetBsApi
+    module Domain
+      module EmailForward
+
+
+      end
+    end
+  end
+end
