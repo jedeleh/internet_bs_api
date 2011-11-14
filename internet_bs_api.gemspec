@@ -7,16 +7,14 @@ require "internet_bs_api/version"
 Gem::Specification.new do |s|
   s.name        = "internet_bs_api"
   s.version     = InternetBsApi::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of InternetBsApi."
+  s.authors     = ["JD Kaplan"]
+  s.email       = ["jaydel@gmail.com"]
+  s.homepage    = "https://github.com/jedeleh/internet_bs_api"
+  s.summary     = "Wrapper for the Internet.bs reseller API."
   s.description = "TODO: Description of InternetBsApi."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.1.1"
-
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "rails", "> 3.0"
 end
