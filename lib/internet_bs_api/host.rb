@@ -1,22 +1,18 @@
-module IBS
-  module InternetBsApi
-    module Domain
-      module Host
-        def create
-        end
+module InternetBsApi
+  module Domain
+    def create_host
+    end
 
-        def update
-        end
+    def update_host
+    end
 
-        def info
-        end
+    def info_host
+    end
 
-        def delete
-        end
+    def delete_host
+    end
 
-        def list
-        end
-      end
+    def list_host
     end
   end
 end

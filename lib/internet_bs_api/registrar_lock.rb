@@ -1,16 +1,12 @@
-module IBS
-  module InternetBsApi
-    module Domain
-      module RegistrarLock
-        def enable
-        end
+module InternetBsApi
+  module Domain
+    def enable_registrar_lock
+    end
 
-        def disable
-        end
+    def disable_registrar_lock
+    end
 
-        def status
-        end
-      end
+    def status_registrar_lock
     end
   end
 end

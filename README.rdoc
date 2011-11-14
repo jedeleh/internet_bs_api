@@ -1,3 +1,38 @@
 = InternetBsApi
 
-This project rocks and uses MIT-LICENSE.
+This gem wraps the Internet.bs resellers API for use in RoR applications. The
+plan is to implement the basic API calls for only the US. Eventually support
+for other countries could be introduced.
+
+Internet.bs provides, in my opinion, the most comprehensive reseller API. I
+tried out a bunch of other ones and most of them had a minimal set of calls, or
+were only useable from specific development tools (Java or .NET for example). I
+found more than one that seemed solid but when you tried to get the provider
+involved all you heard was crickets. The only thing that seems to be missing
+from Internet.bs is a gem to use this API in RoR easily and cleanly. So here it
+is.
+
+Please note that this is extremely immature at this point, and any help or
+contribution is welcome.
+
+setup:
+
+1. install the gem
+2. edit the config/internet_bs_api.yaml to use your own API credentials as
+  provided by Internet.bs.
+
+use:
+
+  class Foo
+    include InternetBsApi
+  end
+
+Disclaimer:
+
+I have no ownership of the Internet.bs resellers API, nor do I have
+any relationship with Internet.bs. If you use this gem you are responsible for
+your own support from the authors of the API itself. This wrapper is provided
+for free, and all I ask is that if you make changes, fork and poke me so I can
+pull them back in.
+
+This project is provided under the MIT-LICENSE.

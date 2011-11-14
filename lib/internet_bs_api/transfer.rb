@@ -1,35 +1,28 @@
-module IBS
-  module InternetBsApi
-    module Domain
-      module Transfer
-        def initiate
-        end
+module InternetBsApi
+  module Domain
+    def initiate_transfer
+    end
 
-        def cancel
-        end
+    def cancel_transfer
+      puts "cancel"
+    end
 
-        def resend_auth_email
-        end
+    def resend_auth_email_transfer
+    end
 
-        def history
-        end
+    def history_transfer
+    end
 
-        def retry
-        end
-      end
+    def retry_transfer
+    end
 
-      module TransferAway
-        def approve
-        end
+    def approve_transfer_away
+    end
 
-        def reject
-        end
-      end
+    def reject_transfer_away
+    end
 
-      module Trade
-        def create
-        end
-      end
+    def create_trade
     end
   end
 end

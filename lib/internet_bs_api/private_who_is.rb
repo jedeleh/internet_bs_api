@@ -1,16 +1,12 @@
-module IBS
-  module InternetBsApi
-    module Domain
-      module PrivateWhoIs
-        def enable
-        end
+module InternetBsApi
+  module Domain
+    def enable_private_who_is
+    end
 
-        def disable
-        end
+    def disable_private_who_is
+    end
 
-        def status
-        end
-      end
+    def status_private_who_is
     end
   end
 end
