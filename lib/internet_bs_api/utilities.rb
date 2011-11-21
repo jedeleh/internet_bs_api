@@ -74,3 +74,10 @@ def validate_list(fields_list)
   end
 end
 
+def set_optional_fields(options_list, options)
+  options_list.each do |key, value|
+    options[key] = value if value
+  end
+  options
+end
+

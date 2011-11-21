@@ -57,4 +57,15 @@ describe "Utilities" do
       validate_email("foober@foo.com").should be_true
     end
   end
+
+  describe "#set_optional_fields" do
+    it "sets optional fields" do
+      options = {}
+      optional_fields = [ ["Value1", "value_1"], ["Value2", "value_2"] ]
+      options = set_optional_fields(optional_fields, options)
+      options.length.should == 2
+      options["Value1"].should == "value_1"
+      options["Value2"].should == "value_2"
+    end
+  end
 end
