@@ -8,9 +8,7 @@ module InternetBsApi
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/01_domain_related/01_domain_check
     def check_domain(domain_name_with_tld)
       # validation
-      if check_domain_format(clone_contact_domain) == false
-        raise InvalidInputParameters.new("Invalid domain format. Please use this format: example.net")
-      end
+      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
 
       connection = Connection.new
       options = {"Domain" => domain_name_with_tld}
@@ -22,7 +20,6 @@ module InternetBsApi
     # convenience method:  this will check a domain against a list of tlds that
     # are of interest. Still calls the one at a time check above for each tld
     def check_multiple_tlds(domain, tlds)
-      # TODO: representation for response that is more useful.
       responses = []
       tlds.each do |tld|
         domain_name_with_tld = domain + "." + tld
@@ -34,9 +31,10 @@ module InternetBsApi
     # --------------------------------------------------------------------------------------------
 
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/01_domain_related/02_domain_create
-    def create_domain(domain_name_with_tld, contacts, clone_contact_domain)
+    def create_domain(domain_name_with_tld, contacts_optional, clone_contact_domain_optional)
       # validation
-      if contacts.nil? && check_domain_format(clone_contact_domain) == false
+      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      if contacts_optional.nil? && check_domain_format(clone_contact_domain_optional) == false
         raise InvalidInputParameters.new("You must provide either valid contacts or a valid contact clone domain parameter")
       end
 
@@ -58,11 +56,9 @@ module InternetBsApi
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/01_domain_related/03_domain_update
     def update_domain(domain_name_with_tld, contacts, clone_contact_domain)
       # validation
-      if check_domain_format(domain_name_with_tld) == false
-        raise InvalidInputParameters.new("Invalid domain format. Please use this format: example.net")
-      end
-      if clone_contact_domain && check_domain_format(clone_contact_domain) == false
-        raise InvalidInputParameters.new("Invalid clone contact domain format. Please use this format: example.net")
+      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      if contacts_optional.nil? && check_domain_format(clone_contact_domain_optional) == false
+        raise InvalidInputParameters.new("You must provide either valid contacts or a valid contact clone domain parameter")
       end
 
       connection = Connection.new
@@ -81,9 +77,7 @@ module InternetBsApi
 
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/01_domain_related/04_domain_renew
     def renew_domain(domain_name_with_tld, period_optional, discount_code_optional)
-      if check_domain_format(domain_name_with_tld) == false
-        raise InvalidInputParameters.new("Invalid domain format. Please use this format: example.net")
-      end
+      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
 
       connection = Connection.new
       options = {}
@@ -98,9 +92,7 @@ module InternetBsApi
 
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/01_domain_related/05_domain_info
     def get_domain(domain_name_with_tld)
-      if check_domain_format(domain_name_with_tld) == false
-        raise InvalidInputParameters.new("Invalid domain format. Please use this format: example.net")
-      end
+      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
 
       options = {"Domain" => domain_name_with_tld}
       connection.post("Domain/Info", options)

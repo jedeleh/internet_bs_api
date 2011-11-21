@@ -1,2 +1,5 @@
-class InvalidInputParameters < RuntimeError
+class InvalidInputParameters < Exception
+end
+
+class ValidationListEntry < Exception
 end
