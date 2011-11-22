@@ -26,6 +26,19 @@ def validate_email(email_address)
   invalid_format ||= (email_address =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/)
 end
 
+def validate_url(url_string)
+  valid = false
+  if url_string.blank? == false
+    begin
+      uri = URI.parse(domain_with_tld)
+      valid = true
+    rescue URI::InvalidURIError => x
+      valid = false
+    end
+  end
+  valid
+end
+
 # validation constants
 
 # enumerations
@@ -67,6 +80,8 @@ def validate_list(fields_list)
       bad_fields << key if not DNS_RECORD_TYPE_ENUM.include? value
     elsif validate_method == :domain_format
       bad_fields << key if not check_domain_format(value)
+    elsif validate_method == :url_format
+      bad_fields << key if not validate_url(value)
     end
   end
   if bad_fields.length > 0
