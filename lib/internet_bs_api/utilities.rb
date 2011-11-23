@@ -21,6 +21,11 @@ def check_domain_format(domain_with_tld)
   valid
 end
 
+def validate_phone_number(phone_number)
+  invalid_format = phone_number.blank?
+  #invalid_format ||= (phone_number =~ /^\+1\.\d
+end
+
 def validate_email(email_address)
   invalid_format = email_address.blank?
   invalid_format ||= (email_address =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/)

@@ -1,3 +1,7 @@
+require "#{Rails.root}/lib/internet_bs_api/connection.rb"
+require "#{Rails.root}/lib/internet_bs_api/exception.rb"
+require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
+
 module InternetBsApi
   module Domain
 
