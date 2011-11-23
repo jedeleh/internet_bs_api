@@ -19,7 +19,7 @@ setup:
 
 1. install the gem
 2. edit the config/internet_bs_api.yaml to use your own API credentials as
-  provided by Internet.bs.
+provided by Internet.bs.
 
 use:
 
@@ -34,5 +34,10 @@ any relationship with Internet.bs. If you use this gem you are responsible for
 your own support from the authors of the API itself. This wrapper is provided
 for free, and all I ask is that if you make changes, fork and poke me so I can
 pull them back in.
+
+Additionally, I have put comments into the gem API entry points that I took
+directly from the official API documentation. If you find inconsistencies or
+questions please review the official documentation itself. The comments are
+merely provided for convenience sake.
 
 This project is provided under the MIT-LICENSE.
