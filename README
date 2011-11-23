@@ -1,3 +1,11 @@
-A first checkin for a Rails Gem to support the Internet.bs reseller API.
+A Rails Gem to allow for use of the Internet.bs reseller API in Ruby and Ruby
+on Rails projects.
 
-This first pass will only support US behavior. If anyone wants to enhance to add other countries, that would be more than welcome.
+Currently this gem only supports US behavior. If anyone wants to enhance to
+add other countries, that would be more than welcome.
+
+Comments on each API call are taken directly from the Internet.bs Reseller API
+documentation, current as of 11/23/2011. Please note that there are some
+inconsistencies and if you want those cleared up refer to the document on their
+site and/or query them.
+
