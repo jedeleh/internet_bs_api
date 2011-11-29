@@ -1,5 +1,5 @@
 require "#{Rails.root}/lib/internet_bs_api/connection.rb"
-require "#{Rails.root}/lib/internet_bs_api/exception.rb"
+require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
 require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
 
 module InternetBsApi
@@ -121,7 +121,7 @@ module InternetBsApi
       # optional options
       optional_fields = [ ["CurrentValue", current_value_optional],
         ["CurrentTtl", current_ttl_optional],
-        ["CurrentPriority", current_priority_optional]],
+        ["CurrentPriority", current_priority_optional],
         ["CurrentDynDnsLogin", current_dyn_dns_login_optional],
         ["CurrentDynDnsPassword", current_dyn_dns_password_optional]
       ]
@@ -154,7 +154,7 @@ module InternetBsApi
     #  records_2_ttl=3600
     #  records_2_type=CNAME
     #
-    def list_dns_records(domain, filter_type_optional
+    def list_dns_records(domain, filter_type_optional)
       validate_list([["Domain", domain, :domain_format]])
       options = { "Domain" => domain }
 

@@ -1,5 +1,5 @@
 require "#{Rails.root}/lib/internet_bs_api/connection.rb"
-require "#{Rails.root}/lib/internet_bs_api/exception.rb"
+require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
 require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
 
 module InternetBsApi
@@ -26,7 +26,8 @@ module InternetBsApi
     #
     def get_balance(currency_optional)
       connection = Connection.new
-      options = {"Currency" => currency_optional}
+      options = {}
+      options["Currency"] = currency_optional if not currency_optional.blank?
       connection.post("Account/Balance/Get", options)
     end
 
@@ -68,7 +69,7 @@ module InternetBsApi
     #  status=SUCCESS
     #
     def set_default_currency(currency)
-      validate_list([["Currency", currency], :presence])
+      validate_list([["Currency", currency, :presence]])
 
       connection = Connection.new
       options = {"Currency" => currency}
@@ -130,10 +131,10 @@ module InternetBsApi
 
       options = {
         "TransferApprovalCss" => transfer_approval_css,
-        "ResellerName" => reseller_name
-        "ResellerSenderEmail" => reseller_sender_email
-        "ResellerSupportEmail" => reseller_support_email
-        "ResellerWhoisHeader" => reseller_whois_header
+        "ResellerName" => reseller_name,
+        "ResellerSenderEmail" => reseller_sender_email,
+        "ResellerSupportEmail" => reseller_support_email,
+        "ResellerWhoisHeader" => reseller_whois_header,
         "ResellerWhoisFooter" => reseller_whois_footer
       }
       connection = Connection.new

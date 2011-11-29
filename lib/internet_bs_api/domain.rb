@@ -1,5 +1,5 @@
 require "#{Rails.root}/lib/internet_bs_api/connection.rb"
-require "#{Rails.root}/lib/internet_bs_api/exception.rb"
+require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
 require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
 
 module InternetBsApi
@@ -35,7 +35,7 @@ module InternetBsApi
     #
     def check_domain(domain_name_with_tld)
       # validation
-      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      validate_list([ ["Domain", domain_name_with_tld, :domain_format] ])
 
       connection = Connection.new
       options = {"Domain" => domain_name_with_tld}
@@ -80,17 +80,19 @@ module InternetBsApi
     #
     def create_domain(domain_name_with_tld, contacts_optional, clone_contact_domain_optional)
       # validation
-      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      validate_list([ ["Domain", domain_name_with_tld, :domain_format] ])
       if contacts_optional.nil? && check_domain_format(clone_contact_domain_optional) == false
         raise InvalidInputParameters.new("You must provide either valid contacts or a valid contact clone domain parameter")
       end
 
       connection = Connection.new
       options = {}
-      if contacts
-        options = contacts
+      if contacts_optional
+        contacts_optional.each do |co|
+          options.merge!(co.to_options)
+        end
       else
-        options["CloneContactsFromDomain"] = clone_contact_domain
+        options["CloneContactsFromDomain"] = clone_contact_domain_optional
       end
       options["Domain"] = domain_name_with_tld
 
@@ -119,19 +121,21 @@ module InternetBsApi
     #  transactid=65a247a02837d3334196915143ea613e
     #  status=SUCCESS
     #
-    def update_domain(domain_name_with_tld, contacts, clone_contact_domain)
+    def update_domain(domain_name_with_tld, contacts_optional, clone_contact_domai_optionaln)
       # validation
-      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      validate_list([ ["Domain", domain_name_with_tld, :domain_format] ])
       if contacts_optional.nil? && check_domain_format(clone_contact_domain_optional) == false
         raise InvalidInputParameters.new("You must provide either valid contacts or a valid contact clone domain parameter")
       end
 
       connection = Connection.new
       options = {}
-      if contacts
-        options = contacts
+      if contacts_optional
+        contacts_optional.each do |co|
+          options.merge!(co.to_options)
+        end
       elsif clone_contact_domain
-        options["CloneContactsFromDomain"] = clone_contact_domain
+        options["CloneContactsFromDomain"] = clone_contact_domai_optional
       end
       options["Domain"] = domain_name_with_tld
 
@@ -161,7 +165,7 @@ module InternetBsApi
     #  product_0_newexpiration=2012/03/05
     #
     def renew_domain(domain_name_with_tld, period_optional, discount_code_optional)
-      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      validate_list([ ["Domain", domain_name_with_tld, :domain_format] ])
 
       connection = Connection.new
       options = {}
@@ -230,7 +234,7 @@ module InternetBsApi
     #  contacts_billing_country=BAHAMAS
     #  transferauthinfo=testauthinfo
     def get_domain(domain_name_with_tld)
-      validate_list([ [["Domain", domain_name_with_tld], :domain_format] ])
+      validate_list([ ["Domain", domain_name_with_tld, :domain_format] ])
 
       options = {"Domain" => domain_name_with_tld}
       connection.post("Domain/Info", options)

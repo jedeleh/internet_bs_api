@@ -1,5 +1,5 @@
 require "#{Rails.root}/lib/internet_bs_api/connection.rb"
-require "#{Rails.root}/lib/internet_bs_api/exception.rb"
+require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
 require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
 
 module InternetBsApi
@@ -235,7 +235,7 @@ module InternetBsApi
     #  Domain=example.com
     #
     def reject_transfer_away(domain, reason)
-      validate_list([ ["Domain", domain, :domain_format], ["Reason", reason, :presence ])
+      validate_list([ ["Domain", domain, :domain_format], ["Reason", reason, :presence ] ])
       options = { "Domain" => domain, "Reason" => reason }
 
       connection = Connection.new

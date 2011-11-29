@@ -71,8 +71,7 @@ DNS_RECORD_TYPE_ENUM = [
 def validate_list(fields_list)
   # make sure the list is
   fields_list.each do |l|
-    raise ValidationListEntry.new("Bad fields list for top level Array!") if (l.class != Array or l.length != 2)
-    raise ValidationListEntry.new("Bad fields list for nested Array!") if (l[0].class != Array or l[0].length != 2)
+    raise ValidationListEntry.new("Bad fields list for nested Array!") if (l.class != Array or l.size != 3)
   end
 
   bad_fields = []

@@ -1,3 +1,7 @@
+require "#{Rails.root}/lib/internet_bs_api/connection.rb"
+require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
+require "#{Rails.root}/lib/internet_bs_api/utilities.rb"
+
 module InternetBsApi
   module Domain
     # http://internetbs.net/ResellerRegistrarDomainNameAPI/api/03_registrar_lock/01_domain_registrar_lock_enable

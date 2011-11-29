@@ -3,7 +3,7 @@ require "#{Rails.root}/lib/internet_bs_api/contact.rb"
 require "#{Rails.root}/lib/internet_bs_api/exceptions.rb"
 
 describe Contact do
-  describe "#as_query" do
+  describe "#to_query" do
     it "raises InvalidContactException when missing required parameters" do
       contact = Contact.new
       lambda {contact.to_query("Admin_")}.should raise_error
@@ -40,19 +40,21 @@ describe Contact do
       lambda {valid_contact.to_query("Admin_")}.should raise_error
     end
   end
-end
 
-def initialize_valid_contact
-  contact = Contact.new
-
-  contact.first_name = "A"
-  contact.last_name = "B"
-  contact.email = "C@D.com"
-  contact.phone_number = "+1.2345678912"
-  contact.street = "E"
-  contact.city = "F"
-  contact.country_code = "US"
-  contact.postal_code = "98765"
-
-  contact
+  describe "#to_options" do
+    it "returns a valid hash" do
+      valid_contact = initialize_valid_contact
+      expected_hash = {
+        "Admin_FirstName" => valid_contact.first_name,
+        "Admin_LastName" => valid_contact.last_name,
+        "Admin_Email" => valid_contact.email,
+        "Admin_PhoneNumber" => valid_contact.phone_number,
+        "Admin_Street" => valid_contact.street,
+        "Admin_City" => valid_contact.city,
+        "Admin_CountryCode" => valid_contact.country_code,
+        "Admin_PostalCode" => valid_contact.postal_code
+      }
+      valid_contact.to_options().should == expected_hash
+    end
+  end
 end

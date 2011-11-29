@@ -29,19 +29,31 @@ class Connection
     options.merge!({ "ResponseFormat" => @response_format, "ApiKey" => @api_key, "Password" => @password })
     url = "#{@base_url}#{path}?"
 
-    parameters = []
-    options.each_pair do |name, value|
-      parameters << "#{name}=#{value}"
-    end
-    url += parameters.join("&")
+    url = build_url_query_string(url, options)
   end
 
   def build_post_url(path)
-    url = "#{@base_url}#{path}?ResponseFormat=#{@response_format}&ApiKey=#{@api_key}&Password=#{@password}"
+    url = "#{@base_url}#{path}?"
+    options = { "ResponseFormat" => @response_format, "ApiKey" => @api_key, "Password" => @password }
+    url = build_url_query_string(url, options)
+  end
+
+  def build_url_query_string(base_url, options)
+    parameters = []
+    options.each_pair do |name, value|
+      parameters << "#{name}=#{encode_url_value(value)}"
+    end
+    base_url += parameters.join("&")
+    base_url
+  end
+
+  def encode_url_value(value)
+    URI.escape(value, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
 end
 
 class ResponseValues
+  attr_accessor :code
 
   def initialize(response)
     @values = ingest_response response
@@ -58,9 +70,9 @@ class ResponseValues
 
   def ingest_response(response)
     values = {}
-    response.body.split("\n").each do |pair|
-      tuple = pair.split("=")
-      values[tuple[0]] = tuple[1]
+    body = JSON.parse(response.body)
+    body.each do |key, value|
+      values[key] = value
     end
     values
   end
