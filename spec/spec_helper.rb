@@ -49,3 +49,18 @@ def initialize_valid_contact
 
   contact
 end
+
+def create_valid_domain(api, domain)
+  api.create_domain(domain, create_contacts, nil)
+  domain
+end
+
+def create_contacts
+  contacts = []
+  Contact::ALL_CONTACT_TYPES.each do |ct|
+    contact = initialize_valid_contact
+    contact.contact_type = ct
+    contacts << contact
+  end
+  contacts
+end

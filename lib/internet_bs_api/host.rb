@@ -35,6 +35,9 @@ module InternetBsApi
     #  transactid=c283a85cc044c43585a13ebb1e701002
     #  status=SUCCESS
     #
+    # NOTE: the ip_list argument is a comma separated string list of the ips,
+    # NOT an array of ip strings.
+    #
     def create_host(host, ip_list)
       validate_list([["Host", host, :presence], ["IP_List", ip_list, :presence]])
       options = {"Host" => host, "IP_List" => ip_list}
@@ -68,6 +71,9 @@ module InternetBsApi
     #  ip_0=221.11.21.13
     #  ip_1=194.221.22.32
     #
+    # NOTE: the ip_list argument is a comma separated string list of the ips,
+    # NOT an array of ip strings.
+    #
     def update_host(host, ip_list)
       validate_list([["Host", host, :presence], ["IP_List", ip_list, :presence]])
       options = {"Host" => host, "IP_List" => ip_list}
@@ -87,7 +93,7 @@ module InternetBsApi
     #  STATUS=SUCCESS or PENDING or FAILURE
     #  TRANSACTID=Transaction ID
     #  HOST=The host name
-    #  IP1=IP address
+    #  IP_0=IP address
     #  ...
     #  ...
     #  IP_<N>= IP address
@@ -123,7 +129,7 @@ module InternetBsApi
     #  transactid=c283a85cc044c43585a13ebb1e701002
     #  status=SUCCESS
     #
-    def delete_host
+    def delete_host(host)
       validate_list([["Host", host, :presence]])
       options = {"Host" => host}
 
@@ -177,7 +183,7 @@ module InternetBsApi
     #  host_3_ip_1=121.211.42.77
     #  host_3_ip_2=144.222.21.92
     #
-    def list_host(domain, compact_list_optional)
+    def list_hosts(domain, compact_list_optional)
       validate_list([["Domain", domain, :domain_format]])
       options = {"Domain" => domain}
       optional_fields = [ ["compact_list_optional", compact_list_optional] ]

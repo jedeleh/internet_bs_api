@@ -72,7 +72,7 @@ describe "Account API" do
   describe "#set_configuration" do
     it "returns valid reponse values" do
       api = AccountApi.new
-      response = api.set_configuration("h1{color:red}", "booger", "a@b.com", "c@d.com", "foo", "bar")
+      response = api.set_configuration("h1{color:red}", "booger", "aaa@bbb.com", "ccc@ddd.com", "foo", "bar")
       response.code.should == 200
       response["status"].should == "SUCCESS"
     end
@@ -106,9 +106,8 @@ describe "Account API" do
 
     it "returns valid json if one of the transaction id values is set" do
       api = AccountApi.new
-      response = api.set_configuration("h1{color:red}", "booger", "a@b.com", "c@d.com", "foo", "bar")
+      response = api.set_configuration("h1{color:red}", "booger", "aaa@bbb.com", "ccc@ddd.com", "foo", "bar")
       response = api.get_transaction_info(response["transactid"], nil, nil)
-      y response
       response.code.should == 200
       response["status"].should == "SUCCESS"
 

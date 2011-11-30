@@ -5,32 +5,32 @@ describe "Utilities" do
   describe "#validate_list" do
     describe "raises an exception for" do
       it "invalid email" do
-        options = [[["Email", "foo bar"], :email]]
+        options = [["Email", "foo bar", :email]]
         lambda { validate_list(options) }.should raise_error
       end
 
       it "invalid domain" do
-        options = [[["Domain", "ren com"], :domain_format]]
+        options = [["Domain", "ren com", :domain_format]]
         lambda { validate_list(options) }.should raise_error
       end
 
       it "missing, nil or blank parameter" do
-        options = [[["Required", nil], :presence]]
+        options = [["Required", nil, :presence]]
         lambda { validate_list(options) }.should raise_error
       end
 
       it "dns record type not in range error" do
-        options = [[["Enum", "baz"], :dns_record_type]]
+        options = [["Enum", "baz", :dns_record_type]]
         lambda { validate_list(options) }.should raise_error
       end
     end
 
     it "does not raise an exception for valid parameters" do
         options = [
-          [["DnsRecordType", "CNAME"], :dns_record_type],
-          [["Email", "foo@bar.com"], :email],
-          [["Domain", "foo.com"], :domain_format],
-          [["Presence", "com"], :presence]
+          ["DnsRecordType", "CNAME", :dns_record_type],
+          ["Email", "foo@bar.com", :email],
+          ["Domain", "foo.com", :domain_format],
+          ["Presence", "com", :presence]
         ]
         lambda { validate_list(options) }.should_not raise_error
     end

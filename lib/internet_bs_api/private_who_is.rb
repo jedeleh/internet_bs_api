@@ -101,7 +101,7 @@ module InternetBsApi
       options = { "Domain" => domain }
 
       connection = Connection.new
-      connection.post("Domain/PrivateWhois/List", options)
+      connection.post("Domain/PrivateWhois/Status", options)
     end
   end
 end

@@ -24,15 +24,6 @@ describe "Domain API" do
       response.code.should == 200
       response["status"].should == "UNAVAILABLE"
     end
-
-    it "returns status FAILURE for an incorrectly formed domain" do
-      invalid_domain = "www.#{generate_domain}"
-      api = DomainApi.new
-      response = api.check_domain(invalid_domain)
-      response.code.should == 200
-      response["status"].should == "FAILURE"
-      response["message"].should == "Invalid value \"#{invalid_domain}\" for parameter \"domain\"!"
-    end
   end
 
   describe "#create_domain" do

@@ -75,7 +75,7 @@ def validate_list(fields_list)
   end
 
   bad_fields = []
-  fields_list.each do |(key,value),validate_method|
+  fields_list.each do |key,value,validate_method|
     if validate_method == :email
       bad_fields << key if not validate_email(value)
     elsif validate_method == :presence
