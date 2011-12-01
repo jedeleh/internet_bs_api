@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["jaydel@gmail.com"]
   s.homepage    = "https://github.com/jedeleh/internet_bs_api"
   s.summary     = "Wrapper for the Internet.bs reseller API."
-  s.description = "TODO: Description of InternetBsApi."
+  s.description = "A gem that exposes the Internet.bs domain reseller API for use in Ruby applications."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
