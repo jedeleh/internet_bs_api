@@ -37,7 +37,16 @@ pull them back in.
 
 Additionally, I have put comments into the gem API entry points that I took
 directly from the official API documentation. If you find inconsistencies or
-questions please review the official documentation itself. The comments are
-merely provided for convenience sake.
+have further questions please review the official documentation itself. The
+comments are merely provided for convenience sake.
+
+Things that are missing or not supported:
+
+1. optional parameters need to be validated for format if they are present
+2. optional parameters are not exercised in the unit tests adequately
+3. as mentioned above, support for non-US countries has not been implemented.
+  This involves alterative parameter shapes and additional parameters in some
+  cases. I would appreciate any assistance in getting this in place. It's not a
+  huge priority for me but I image others might want it.
 
 This project is provided under the MIT-LICENSE.

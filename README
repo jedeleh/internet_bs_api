@@ -5,7 +5,15 @@ Currently this gem only supports US behavior. If anyone wants to enhance to
 add other countries, that would be more than welcome.
 
 Comments on each API call are taken directly from the Internet.bs Reseller API
-documentation, current as of 11/23/2011. Please note that there are some
-inconsistencies and if you want those cleared up refer to the document on their
-site and/or query them.
+documentation, current as of 11/23/2011. If you have questions about those
+comments please direct queries directly to Internet.bs.
+
+Things that are missing or not supported:
+
+1. optional parameters need to be validated for format if they are present
+2. optional parameters are not exercised in the unit tests adequately
+3. as mentioned above, support for non-US countries has not been implemented.
+  This involves alterative parameter shapes and additional parameters in some
+  cases. I would appreciate any assistance in getting this in place. It's not a
+  huge priority for me but I image others might want it.
 
