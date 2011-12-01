@@ -1,18 +1,18 @@
 require 'spec_helper'
 require "#{Rails.root}/lib/internet_bs_api.rb"
-require "#{Rails.root}/lib/internet_bs_api/email_forward.rb"
+require "#{Rails.root}/lib/internet_bs_api/url_forward.rb"
 
 
-class EmailForwardApi
+class UrlForwardApi
   include InternetBsApi::Domain
 end
 
-describe "Email Forward API" do
-  describe "#add_email_forward" do
+describe "URL Forward API" do
+  describe "#add_url_forward" do
     it "returns valid json" do
       # create a valid domain to transfer from
       #
-      api = EmailForwardApi.new
+      api = UrlForwardApi.new
       source_domain = create_valid_domain(api, generate_domain)
 
       # create a valid domain to transfer to
@@ -22,75 +22,75 @@ describe "Email Forward API" do
       # now transfer it to another valid domain
       #
       transfer_target_domain = generate_domain
-      response = api.add_email_forward("email_1@#{source_domain}", "email_1@#{destination_domain}")
+      response = api.add_url_forward("#{source_domain}", "#{destination_domain}",nil,nil,nil,nil,nil)
       response.code.should == 200
       response["status"].should == "SUCCESS"
     end
 
     it "fails for invalid domains" do
-      api = EmailForwardApi.new
+      api = UrlForwardApi.new
 
       source_domain = generate_domain
       destination_domain = generate_domain
-      response = api.add_email_forward("email_1@#{source_domain}", "email_1@#{destination_domain}")
+      response = api.add_url_forward("#{source_domain}", "#{destination_domain}",nil,nil,nil,nil,nil)
       response.code.should == 200
       response["status"].should == "FAILURE"
     end
   end
 
-  describe "#remove_email_forward" do
+  describe "#remove_url_forward" do
     it "return valid json for success" do
-      api = EmailForwardApi.new
+      api = UrlForwardApi.new
 
       # we need two valid domains
       #
       source_domain = create_valid_domain(api, generate_domain)
       destination_domain = create_valid_domain(api, generate_domain)
 
-      # must forward an email
+      # must forward an url
       #
-      response = api.add_email_forward("email_1@#{source_domain}", "email_1@#{destination_domain}")
+      response = api.add_url_forward("#{source_domain}", "#{destination_domain}",nil,nil,nil,nil,nil)
 
-      response = api.remove_email_forward("email_1@#{source_domain}")
+      response = api.remove_url_forward("#{source_domain}")
       response.code.should == 200
       response["status"].should == "SUCCESS"
     end
 
     it "returns valid json for failure" do
-      api = EmailForwardApi.new
-      response = api.remove_email_forward("email_1@invalid_domain.com")
+      api = UrlForwardApi.new
+      response = api.remove_url_forward("invalid_domain.com")
       response.code.should == 200
       response["status"].should == "FAILURE"
     end
   end
 
-  describe "#update_email_forward" do
+  describe "#update_url_forward" do
     it "returns valid json for success" do
-      api = EmailForwardApi.new
+      api = UrlForwardApi.new
 
       # we need two valid domains and a forward
       #
       source_domain = create_valid_domain(api, generate_domain)
       destination_domain = create_valid_domain(api, generate_domain)
-      api.add_email_forward("email_1@#{source_domain}", "email_1@#{destination_domain}")
+      api.add_url_forward("#{source_domain}", "#{destination_domain}",nil,nil,nil,nil,nil)
 
-      response = api.update_email_forward("email_1@#{source_domain}", "email_3@#{destination_domain}")
+      response = api.update_url_forward("#{source_domain}", "#{destination_domain}", nil, nil, nil, nil, nil)
       response.code.should == 200
       response["status"].should == "SUCCESS"
     end
   end
 
-  describe "#list_email_forward" do
+  describe "#list_url_forward" do
     it "returns valid json for call without optional parameters" do
-      api = EmailForwardApi.new
+      api = UrlForwardApi.new
 
       # we need two valid domains and a forward
       #
       source_domain = create_valid_domain(api, generate_domain)
       destination_domain = create_valid_domain(api, generate_domain)
-      api.add_email_forward("email_1@#{source_domain}", "email_1@#{destination_domain}")
+      api.add_url_forward("#{source_domain}", "#{destination_domain}", nil,nil,nil,nil,nil)
 
-      response = api.list_email_forwards(source_domain, nil, nil)
+      response = api.list_url_forwards(source_domain, nil, nil)
       response.code.should == 200
       response["total_rules"].should == 1
       response["status"].should == "SUCCESS"

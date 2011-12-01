@@ -18,9 +18,12 @@ module InternetBsApi
     #  transactid=c283a85cc044c43585a13ebb1e701002
     #  status=SUCCESS
     #
-    def add_url_forward(source, domain,
-                        is_framed_optional, site_title_optional, meta_description_optional,
-                        meta_keywords_optional, redirect_301_optional )
+    def add_url_forward(source, destination,
+                        is_framed_optional,
+                        site_title_optional,
+                        meta_description_optional,
+                        meta_keywords_optional,
+                        redirect_301_optional )
       validate_list( [ ["Source", source, :url_format], ["Destination", destination, :url_format] ])
       options = {"Source" => source, "Destination" => destination}
 
@@ -50,7 +53,7 @@ module InternetBsApi
     #  transactid=c283a85cc044c43585a13ebb1e701002
     #  status=SUCCESS
     #
-    def remove_url_forward
+    def remove_url_forward(source)
       validate_list( [ ["Source", source, :url_format] ])
       options = {"Source" => source}
 
@@ -81,9 +84,12 @@ module InternetBsApi
     #  transactid=c283a85cc044c43585a13ebb1e701002
     #  status=SUCCESS
     #
-    def update_url_forward(source, domain,
-                        is_framed_optional, site_title_optional, meta_description_optional,
-                        meta_keywords_optional, redirect_301_optional )
+    def update_url_forward(source, destination,
+                        is_framed_optional,
+                        site_title_optional,
+                        meta_description_optional,
+                        meta_keywords_optional,
+                        redirect_301_optional )
       validate_list( [ ["Source", source, :url_format], ["Destination", destination, :url_format] ])
       options = {"Source" => source, "Destination" => destination}
 

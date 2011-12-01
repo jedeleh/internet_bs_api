@@ -35,7 +35,7 @@ def validate_url(url_string)
   valid = false
   if url_string.blank? == false
     begin
-      uri = URI.parse(domain_with_tld)
+      uri = URI.parse(url_string)
       valid = true
     rescue URI::InvalidURIError => x
       valid = false
